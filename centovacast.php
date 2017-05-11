@@ -1541,7 +1541,7 @@ class Centovacast extends Module
         try {
             $api = $this->getApi($hostname, $username, $password, $port, $use_ssl);
 
-            return !empty($api->listAccounts());
+            return isset($api->listAccounts()->response);
         } catch (Exception $e) {
             // Trap any errors encountered, could not validate connection
         }
