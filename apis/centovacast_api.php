@@ -244,7 +244,13 @@ class CentovacastApi
      */
     public function listUsernames()
     {
-        $accounts = $this->apiRequest('system.listaccounts')->response->data;
+        try {
+            $accounts = $this->apiRequest('system.listaccounts')->response->data;
+        } catch (Exception $e) {
+            // The system don't have any account yet
+            return [];
+        }
+
         $usernames = [];
 
         foreach ($accounts as $value) {

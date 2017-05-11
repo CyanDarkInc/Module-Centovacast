@@ -185,7 +185,7 @@ class Centovacast extends Module
         $maxclients = $fields->label(Language::_('Centovacast.package_fields.maxclients', true), 'centovacast_maxclients');
         // Create maxclients field and attach to maxclients label
         $maxclients->attach(
-            $fields->fieldText('meta[maxclients]', $this->Html->ifSet($vars->centovacast_maxclients), ['id'=>'centovacast_maxclients'])
+            $fields->fieldText('meta[maxclients]', $this->Html->ifSet($vars->meta['maxclients']), ['id'=>'centovacast_maxclients'])
         );
         // Add tooltip
         $tooltip = $fields->tooltip(Language::_('Centovacast.package_fields.tooltip.maxclients', true));
@@ -197,7 +197,7 @@ class Centovacast extends Module
         $maxbitrate = $fields->label(Language::_('Centovacast.package_fields.maxbitrate', true), 'centovacast_maxbitrate');
         // Create maxbitrate field and attach to maxbitrate label
         $maxbitrate->attach(
-            $fields->fieldText('meta[maxbitrate]', $this->Html->ifSet($vars->centovacast_maxbitrate), ['id'=>'centovacast_maxbitrate'])
+            $fields->fieldText('meta[maxbitrate]', $this->Html->ifSet($vars->meta['maxbitrate']), ['id'=>'centovacast_maxbitrate'])
         );
         // Add tooltip
         $tooltip = $fields->tooltip(Language::_('Centovacast.package_fields.tooltip.maxbitrate', true));
@@ -209,7 +209,7 @@ class Centovacast extends Module
         $transferlimit = $fields->label(Language::_('Centovacast.package_fields.transferlimit', true), 'centovacast_transferlimit');
         // Create transferlimit field and attach to transferlimit label
         $transferlimit->attach(
-            $fields->fieldText('meta[transferlimit]', $this->Html->ifSet($vars->centovacast_transferlimit), ['id'=>'centovacast_transferlimit'])
+            $fields->fieldText('meta[transferlimit]', $this->Html->ifSet($vars->meta['transferlimit']), ['id'=>'centovacast_transferlimit'])
         );
         // Add tooltip
         $tooltip = $fields->tooltip(Language::_('Centovacast.package_fields.tooltip.transferlimit', true));
@@ -221,7 +221,7 @@ class Centovacast extends Module
         $diskquota = $fields->label(Language::_('Centovacast.package_fields.diskquota', true), 'centovacast_diskquota');
         // Create diskquota field and attach to diskquota label
         $diskquota->attach(
-            $fields->fieldText('meta[diskquota]', $this->Html->ifSet($vars->centovacast_diskquota), ['id'=>'centovacast_diskquota'])
+            $fields->fieldText('meta[diskquota]', $this->Html->ifSet($vars->meta['diskquota']), ['id'=>'centovacast_diskquota'])
         );
         // Add tooltip
         $tooltip = $fields->tooltip(Language::_('Centovacast.package_fields.tooltip.diskquota', true));
