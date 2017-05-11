@@ -42,9 +42,9 @@ class Centovacast extends Module
     }
 
     /**
-     * Returns the version of this gateway.
+     * Returns the version of this module.
      *
-     * @return string The current version of this gateway
+     * @return string The current version of this module
      */
     public function getVersion()
     {
@@ -854,14 +854,18 @@ class Centovacast extends Module
             $this->log($row->meta->hostname . '|createaccount', serialize($masked_params), 'input', true);
             unset($masked_params);
 
-            // Initialize API
-            $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+            try {
+                // Initialize API
+                $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
 
-            // Select random hosting server
-            $servers = $this->parseResponse($api->listServers());
-            $params['rpchostid'] = $servers[array_rand($servers)]->id;
+                // Select random hosting server
+                $servers = $this->parseResponse($api->listServers());
+                $params['rpchostid'] = $servers[array_rand($servers)]->id;
 
-            $result = $this->parseResponse($api->createAccount($params));
+                $result = $this->parseResponse($api->createAccount($params));
+            } catch (Exception $e) {
+                $this->Input->setErrors(['api' => ['internal' => Language::_('Centovacast.!error.api.internal', true)]]);
+            }
 
             if ($this->Input->errors()) {
                 return;
