@@ -22,7 +22,6 @@
                         <td><?php $this->Html->_($value); ?></td>
                     </tr>
                     <?php
-
                     }
 
                     $i++;
