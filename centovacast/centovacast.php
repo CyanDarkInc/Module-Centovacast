@@ -18,7 +18,7 @@ class Centovacast extends Module
     /**
      * @var string The authors of this module
      */
-    private static $authors = [['name'=>'Phillips Data, Inc.','url'=>'http://www.blesta.com']];
+    private static $authors = [['name'=>'Phillips Data, Inc.', 'url'=>'http://www.blesta.com']];
 
     /**
      * Initializes the module.
@@ -1510,9 +1510,8 @@ class Centovacast extends Module
      * Updates the module row meta number of accounts.
      *
      * @param stdClass $module_row A stdClass object representing a single server
-     * @param mixed $increase
      */
-    private function updateAccountCount($module_row, $increase = true)
+    private function updateAccountCount($module_row)
     {
         // Initialize API
         $api = $this->getApi($module_row->meta->hostname, $module_row->meta->username, $module_row->meta->password, $module_row->meta->port, $module_row->meta->use_ssl);
@@ -1536,11 +1535,11 @@ class Centovacast extends Module
      * Validates whether or not the connection details are valid by attempting to fetch
      * the number of accounts that currently reside on the server.
      *
-     * @param mixed $password
-     * @param mixed $hostname
-     * @param mixed $username
-     * @param mixed $port
-     * @param mixed $use_ssl
+     * @param mixed $password The CentovaCast password
+     * @param mixed $hostname The CentovaCast hostname
+     * @param mixed $username The CentovaCast username
+     * @param mixed $port The CentovaCast installation port
+     * @param mixed $use_ssl Ture to use SSL
      * @return bool True if the connection is valid, false otherwise
      */
     public function validateConnection($password, $hostname, $username, $port, $use_ssl)
@@ -1713,34 +1712,34 @@ class Centovacast extends Module
     private function getRowRules(&$vars)
     {
         $rules = [
-            'server_name'=>[
-                'valid'=>[
-                    'rule'=>'isEmpty',
-                    'negate'=>true,
-                    'message'=>Language::_('Centovacast.!error.server_name_valid', true)
+            'server_name' => [
+                'valid' => [
+                    'rule' => 'isEmpty',
+                    'negate' => true,
+                    'message' => Language::_('Centovacast.!error.server_name_valid', true)
                 ]
             ],
-            'hostname'=>[
-                'valid'=>[
-                    'rule'=>[[$this, 'validateHostName']],
-                    'message'=>Language::_('Centovacast.!error.host_name_valid', true)
+            'hostname' => [
+                'valid' => [
+                    'rule' => [[$this, 'validateHostName']],
+                    'message' => Language::_('Centovacast.!error.host_name_valid', true)
                 ]
             ],
-            'username'=>[
-                'valid'=>[
-                    'rule'=>'isEmpty',
-                    'negate'=>true,
-                    'message'=>Language::_('Centovacast.!error.user_name_valid', true)
+            'username' => [
+                'valid' => [
+                    'rule' => 'isEmpty',
+                    'negate' => true,
+                    'message' => Language::_('Centovacast.!error.user_name_valid', true)
                 ]
             ],
-            'password'=>[
-                'valid'=>[
-                    'last'=>true,
-                    'rule'=>'isEmpty',
-                    'negate'=>true,
-                    'message'=>Language::_('Centovacast.!error.password_valid', true)
+            'password' => [
+                'valid' => [
+                    'last' => true,
+                    'rule' => 'isEmpty',
+                    'negate' => true,
+                    'message' => Language::_('Centovacast.!error.password_valid', true)
                 ],
-                'valid_connection'=>[
+                'valid_connection' => [
                     'rule' => [
                         [$this, 'validateConnection'],
                         $vars['hostname'],
@@ -1748,19 +1747,19 @@ class Centovacast extends Module
                         $vars['port'],
                         $vars['use_ssl']
                     ],
-                    'message'=>Language::_('Centovacast.!error.password_valid_connection', true)
+                    'message' => Language::_('Centovacast.!error.password_valid_connection', true)
                 ]
             ],
-            'account_limit'=>[
-                'valid'=>[
-                    'rule'=>['matches', '/^([0-9]+)?$/'],
-                    'message'=>Language::_('Centovacast.!error.account_limit_valid', true)
+            'account_limit' => [
+                'valid' => [
+                    'rule' => ['matches', '/^([0-9]+)?$/'],
+                    'message' => Language::_('Centovacast.!error.account_limit_valid', true)
                 ]
             ],
-            'port'=>[
-                'valid'=>[
-                    'rule'=>['matches', '/^([0-9]+)?$/'],
-                    'message'=>Language::_('Centovacast.!error.port_valid', true)
+            'port' => [
+                'valid' => [
+                    'rule' => ['matches', '/^([0-9]+)?$/'],
+                    'message' => Language::_('Centovacast.!error.port_valid', true)
                 ]
             ]
         ];
