@@ -42,6 +42,7 @@ class CentovacastApi
 
     /**
      * Initializes the class.
+     *
      * @param mixed $hostname
      * @param mixed $username
      * @param mixed $password

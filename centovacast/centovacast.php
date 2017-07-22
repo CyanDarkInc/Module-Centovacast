@@ -1688,14 +1688,11 @@ class Centovacast extends Module
     /**
      * Initializes the CentovacastApi and returns an instance of that object with the given $host, $user, and $pass set.
      *
-     * @param string $host The host to the CentovaCast server
-     * @param string $user The user to connect as
-     * @param string $pass The hash-pased password to authenticate with
-     * @param mixed $hostname
-     * @param mixed $username
-     * @param mixed $password
-     * @param mixed $port
-     * @param mixed $use_ssl
+     * @param mixed $hostname The host to the CentovaCast server
+     * @param mixed $username The CentovaCast API user
+     * @param mixed $password The CentovaCast API password
+     * @param mixed $port The CentovaCast installation port
+     * @param mixed $use_ssl True to use SSL
      * @return CentovacastApi The CentovacastApi instance
      */
     private function getApi($hostname, $username, $password, $port = 2199, $use_ssl = false)
