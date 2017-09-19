@@ -9,7 +9,7 @@
             $this->Form->fieldHidden('account_count', $this->Html->ifSet($vars->account_count, 0));
             ?>
             <div class="title_row first">
-                <h3><?php $this->_('Centovacast.edit_row.basic_title'); ?></h3>
+                <h3><?php $this->_('Centovacast.edit_row.basic_title');?></h3>
             </div>
             <div class="pad">
                 <ul>
@@ -51,8 +51,8 @@
                     </li>
                     <li>
                         <?php
-                        $this->Form->fieldCheckbox('use_ssl', 'true', $this->Html->ifSet($vars->use_ssl, 'true') == 'true', ['id'=>'use_ssl']);
-                        $this->Form->label($this->_('Centovacast.row_meta.use_ssl', true), 'use_ssl', ['class'=>'inline']);
+                        $this->Form->fieldCheckbox('use_ssl', 'true', $this->Html->ifSet($vars->use_ssl, 'true') == 'true', ['id' => 'use_ssl']);
+                        $this->Form->label($this->_('Centovacast.row_meta.use_ssl', true), 'use_ssl', ['class' => 'inline']);
                         ?>
                     </li>
                     <li>
@@ -65,7 +65,7 @@
             </div>
 
             <div class="title_row">
-                <h3><?php $this->_('Centovacast.edit_row.notes_title'); ?></h3>
+                <h3><?php $this->_('Centovacast.edit_row.notes_title');?></h3>
             </div>
             <div class="pad">
                 <ul>

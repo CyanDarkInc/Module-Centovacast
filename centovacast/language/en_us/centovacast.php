@@ -1,6 +1,6 @@
 <?php
 /**
- * en_us language for the centovacast module.
+ * en_us language for the centovacast module
  */
 // Basics
 $lang['Centovacast.name'] = 'CentovaCast';
@@ -37,6 +37,7 @@ $lang['Centovacast.manage.module_groups_no_results'] = 'There are no server grou
 $lang['Centovacast.order_options.first'] = 'First Non-full Server';
 $lang['Centovacast.order_options.roundrobin'] = 'Evenly Distribute Among Servers';
 
+
 // Add row
 $lang['Centovacast.add_row.box_title'] = 'Add CentovaCast Server';
 $lang['Centovacast.add_row.basic_title'] = 'Basic Settings';
@@ -57,6 +58,7 @@ $lang['Centovacast.row_meta.port'] = 'Port';
 $lang['Centovacast.row_meta.use_ssl'] = 'Use SSL when connecting to the API (recommended)';
 $lang['Centovacast.row_meta.account_limit'] = 'Account Limit';
 
+
 // Package fields
 $lang['Centovacast.package_fields.servertype'] = 'Server Type';
 $lang['Centovacast.package_fields.maxclients'] = 'Maximum Clients';
@@ -64,14 +66,15 @@ $lang['Centovacast.package_fields.maxbitrate'] = 'Maximum Bitrate';
 $lang['Centovacast.package_fields.transferlimit'] = 'Transfer Limit';
 $lang['Centovacast.package_fields.diskquota'] = 'Disk Quota';
 
+
 // Service fields
 $lang['Centovacast.service_field.hostname'] = 'Hostname';
-$lang['Centovacast.service_field.username'] = 'Username';
 $lang['Centovacast.service_field.password'] = 'Password';
 $lang['Centovacast.service_field.title'] = 'Title';
 $lang['Centovacast.service_field.genre'] = 'Genre';
 $lang['Centovacast.service_field.ipaddress'] = 'IP Address';
 $lang['Centovacast.service_field.port'] = 'Port';
+
 
 // Service management
 $lang['Centovacast.tab_actions.status_title'] = 'Server Status';
@@ -105,6 +108,7 @@ $lang['Centovacast.tab_stats.disk_heading.limit'] = 'Limit';
 $lang['Centovacast.tab_stats.disk_value'] = '%1$s MB'; // %1$s is the amount of disk in MB
 $lang['Centovacast.tab_stats.disk_unlimited'] = 'unlimited';
 
+
 // Client actions
 $lang['Centovacast.tab_client_actions.heading_status'] = 'Server Status';
 $lang['Centovacast.tab_client_actions.status_online'] = 'Online';
@@ -130,6 +134,7 @@ $lang['Centovacast.tab_client_actions.heading_password'] = 'Change Password';
 $lang['Centovacast.tab_client_actions.field_password'] = 'Password';
 $lang['Centovacast.tab_client_actions.field_password_submit'] = 'Update Password';
 
+
 // Client Service management
 $lang['Centovacast.tab_client_stats.info_title'] = 'Information';
 $lang['Centovacast.tab_client_stats.info_heading.field'] = 'Field';
@@ -150,12 +155,14 @@ $lang['Centovacast.tab_client_stats.disk_title'] = 'Disk Usage';
 $lang['Centovacast.tab_client_stats.usage'] = '(%1$s MB/%2$s MB)'; // %1$s is the amount of resource usage, %2$s is the resource usage limit
 $lang['Centovacast.tab_client_stats.usage_unlimited'] = '(%1$s MB/∞)'; // %1$s is the amount of resource usage
 
+
 // Service info
 $lang['Centovacast.service_info.hostname'] = 'Hostname';
 $lang['Centovacast.service_info.username'] = 'Username';
 $lang['Centovacast.service_info.password'] = 'Password';
 $lang['Centovacast.service_info.options'] = 'Options';
 $lang['Centovacast.service_info.option_login'] = 'Login';
+
 
 // Tooltips
 $lang['Centovacast.package_fields.tooltip.maxclients'] = 'Specifies the maximum number of listeners that may simultaneously tune the stream.';
@@ -164,6 +171,7 @@ $lang['Centovacast.package_fields.tooltip.transferlimit'] = 'Specifies the maxim
 $lang['Centovacast.package_fields.tooltip.diskquota'] = 'Specifies the maximum disk space for this stream, in megabytes (MB). 0 means unlimited.';
 $lang['Centovacast.service_field.tooltip.ipaddress'] = 'Overwrite default IP address.';
 $lang['Centovacast.service_field.tooltip.port'] = 'Set a specific port for the account, leave blank for select a port automatically.';
+
 
 // Errors
 $lang['Centovacast.!error.server_name_valid'] = 'You must enter a Server Label.';
@@ -176,13 +184,11 @@ $lang['Centovacast.!error.port_valid'] = 'The Port must be an numeric value.';
 $lang['Centovacast.!error.meta[servertype].valid'] = 'The Server Type appears to be invalid.';
 $lang['Centovacast.!error.meta[maxclients].valid'] = 'The Maximum Clients must be a numeric value.';
 $lang['Centovacast.!error.meta[maxbitrate].valid'] = 'The Maximum Bitrate must be a numeric value.';
-$lang['Centovacast.!error.meta[transferlimit].valid'] = 'The Trasnfer Limit must be a numeric value.';
+$lang['Centovacast.!error.meta[transferlimit].valid'] = 'The Transfer Limit must be a numeric value.';
 $lang['Centovacast.!error.meta[diskquota].valid'] = 'The Disk Quota must be a numeric value.';
 
 $lang['Centovacast.!error.api.internal'] = 'An internal error occurred, or the server did not respond to the request.';
 $lang['Centovacast.!error.module_row.missing'] = 'An internal error occurred. The module row is unavailable.';
 
 $lang['Centovacast.!error.centovacast_hostname.format'] = 'Please enter a valid hostname, e.g. domain.com.';
-$lang['Centovacast.!error.centovacast_username.format'] = 'The username may contain only letters and numbers and may not start with a number.';
-$lang['Centovacast.!error.centovacast_username.length'] = 'The username must be between 5 and 10 characters in length.';
 $lang['Centovacast.!error.centovacast_adminpassword.valid'] = 'Password must be at least 5 characters in length.';

@@ -42,12 +42,6 @@ class CentovacastApi
 
     /**
      * Initializes the class.
-     *
-     * @param mixed $hostname
-     * @param mixed $username
-     * @param mixed $password
-     * @param mixed $port
-     * @param mixed $use_ssl
      */
     public function __construct($hostname, $username, $password, $port = 2199, $use_ssl = false)
     {
@@ -70,9 +64,14 @@ class CentovacastApi
         // Set authentication details
         $params['password'] = $this->username . '|' . $this->password;
 
+        $protocol = ($this->use_ssl ? 'https' : 'http');
+        $query = '&f=' . $this->format . (!empty($params) ? '&' . http_build_query(['a' => $params]) : '');
+
+        $url = $protocol . '://' . $this->hostname . ':' . $this->port . '/api.php?xm=' . $method . $query;
+
         // Send request
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, ($this->use_ssl ? 'https' : 'http') . '://' . $this->hostname . ':' . $this->port . '/api.php?xm=' . $method . '&f=' . $this->format . (!empty($params) ? '&' . http_build_query(['a' => $params]) : ''));
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

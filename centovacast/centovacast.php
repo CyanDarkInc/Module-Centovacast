@@ -14,11 +14,10 @@ class Centovacast extends Module
      * @var string The version of this module
      */
     private static $version = '1.0.0';
-
     /**
      * @var string The authors of this module
      */
-    private static $authors = [['name'=>'Phillips Data, Inc.', 'url'=>'http://www.blesta.com']];
+    private static $authors = [['name' => 'Phillips Data, Inc.', 'url' => 'http://www.blesta.com']];
 
     /**
      * Initializes the module.
@@ -167,15 +166,14 @@ class Centovacast extends Module
         $fields = new ModuleFields();
 
         // Set the CentovaCast package as a selectable option
-        $servertype = $fields->label(Language::_('Centovacast.package_fields.servertype', true), 'centovacast_servertype');
+        $servertype = $fields->label(
+            Language::_('Centovacast.package_fields.servertype', true),
+            'centovacast_servertype'
+        );
         $servertype->attach(
             $fields->fieldSelect(
                 'meta[servertype]',
-                [
-                    'IceCast' => 'IceCast',
-                    'ShoutCast2' => 'ShoutCast DNAS v2',
-                    'ShoutCast' => 'ShoutCast DNAS v1'
-                ],
+                $this->getServerTypes(),
                 $this->Html->ifSet($vars->meta['servertype']),
                 ['id' => 'centovacast_servertype']
             )
@@ -183,10 +181,17 @@ class Centovacast extends Module
         $fields->setField($servertype);
 
         // Create maxclients label
-        $maxclients = $fields->label(Language::_('Centovacast.package_fields.maxclients', true), 'centovacast_maxclients');
+        $maxclients = $fields->label(
+            Language::_('Centovacast.package_fields.maxclients', true),
+            'centovacast_maxclients'
+        );
         // Create maxclients field and attach to maxclients label
         $maxclients->attach(
-            $fields->fieldText('meta[maxclients]', $this->Html->ifSet($vars->meta['maxclients']), ['id'=>'centovacast_maxclients'])
+            $fields->fieldText(
+                'meta[maxclients]',
+                $this->Html->ifSet($vars->meta['maxclients']),
+                ['id' => 'centovacast_maxclients']
+            )
         );
         // Add tooltip
         $tooltip = $fields->tooltip(Language::_('Centovacast.package_fields.tooltip.maxclients', true));
@@ -195,10 +200,17 @@ class Centovacast extends Module
         $fields->setField($maxclients);
 
         // Create maxbitrate label
-        $maxbitrate = $fields->label(Language::_('Centovacast.package_fields.maxbitrate', true), 'centovacast_maxbitrate');
+        $maxbitrate = $fields->label(
+            Language::_('Centovacast.package_fields.maxbitrate', true),
+            'centovacast_maxbitrate'
+        );
         // Create maxbitrate field and attach to maxbitrate label
         $maxbitrate->attach(
-            $fields->fieldText('meta[maxbitrate]', $this->Html->ifSet($vars->meta['maxbitrate']), ['id'=>'centovacast_maxbitrate'])
+            $fields->fieldText(
+                'meta[maxbitrate]',
+                $this->Html->ifSet($vars->meta['maxbitrate']),
+                ['id' => 'centovacast_maxbitrate']
+            )
         );
         // Add tooltip
         $tooltip = $fields->tooltip(Language::_('Centovacast.package_fields.tooltip.maxbitrate', true));
@@ -207,10 +219,17 @@ class Centovacast extends Module
         $fields->setField($maxbitrate);
 
         // Create transferlimit label
-        $transferlimit = $fields->label(Language::_('Centovacast.package_fields.transferlimit', true), 'centovacast_transferlimit');
+        $transferlimit = $fields->label(
+            Language::_('Centovacast.package_fields.transferlimit', true),
+            'centovacast_transferlimit'
+        );
         // Create transferlimit field and attach to transferlimit label
         $transferlimit->attach(
-            $fields->fieldText('meta[transferlimit]', $this->Html->ifSet($vars->meta['transferlimit']), ['id'=>'centovacast_transferlimit'])
+            $fields->fieldText(
+                'meta[transferlimit]',
+                $this->Html->ifSet($vars->meta['transferlimit']),
+                ['id' => 'centovacast_transferlimit']
+            )
         );
         // Add tooltip
         $tooltip = $fields->tooltip(Language::_('Centovacast.package_fields.tooltip.transferlimit', true));
@@ -219,10 +238,17 @@ class Centovacast extends Module
         $fields->setField($transferlimit);
 
         // Create diskquota label
-        $diskquota = $fields->label(Language::_('Centovacast.package_fields.diskquota', true), 'centovacast_diskquota');
+        $diskquota = $fields->label(
+            Language::_('Centovacast.package_fields.diskquota', true),
+            'centovacast_diskquota'
+        );
         // Create diskquota field and attach to diskquota label
         $diskquota->attach(
-            $fields->fieldText('meta[diskquota]', $this->Html->ifSet($vars->meta['diskquota']), ['id'=>'centovacast_diskquota'])
+            $fields->fieldText(
+                'meta[diskquota]',
+                $this->Html->ifSet($vars->meta['diskquota']),
+                ['id' => 'centovacast_diskquota']
+            )
         );
         // Add tooltip
         $tooltip = $fields->tooltip(Language::_('Centovacast.package_fields.tooltip.diskquota', true));
@@ -231,6 +257,20 @@ class Centovacast extends Module
         $fields->setField($diskquota);
 
         return $fields;
+    }
+
+    /**
+     * Gets a list of available server types
+     *
+     * @return array A key/value array of available server types and their languages
+     */
+    private function getServerTypes()
+    {
+        return [
+            'IceCast' => 'IceCast',
+            'ShoutCast2' => 'ShoutCast DNAS v2',
+            'ShoutCast' => 'ShoutCast DNAS v1'
+        ];
     }
 
     /**
@@ -253,7 +293,13 @@ class Centovacast extends Module
         return [
             'module' => ['hostname', 'server_name'],
             'package' => ['servertype', 'maxclients', 'maxbitrate', 'transferlimit', 'diskquota'],
-            'service' => ['centovacast_hostname', 'centovacast_username', 'centovacast_adminpassword', 'centovacast_title', 'centovacast_genre']
+            'service' => [
+                'centovacast_hostname',
+                'centovacast_username',
+                'centovacast_adminpassword',
+                'centovacast_title',
+                'centovacast_genre'
+            ]
         ];
     }
 
@@ -443,9 +489,9 @@ class Centovacast extends Module
             foreach ($vars as $key => $value) {
                 if (in_array($key, $meta_fields)) {
                     $meta[] = [
-                        'key'=>$key,
-                        'value'=>$value,
-                        'encrypted'=>in_array($key, $encrypted_fields) ? 1 : 0
+                        'key' => $key,
+                        'value' => $value,
+                        'encrypted' => in_array($key, $encrypted_fields) ? 1 : 0
                     ];
                 }
             }
@@ -486,25 +532,15 @@ class Centovacast extends Module
             foreach ($vars as $key => $value) {
                 if (in_array($key, $meta_fields)) {
                     $meta[] = [
-                        'key'=>$key,
-                        'value'=>$value,
-                        'encrypted'=>in_array($key, $encrypted_fields) ? 1 : 0
+                        'key' => $key,
+                        'value' => $value,
+                        'encrypted' => in_array($key, $encrypted_fields) ? 1 : 0
                     ];
                 }
             }
 
             return $meta;
         }
-    }
-
-    /**
-     * Deletes the module row on the remote server. Sets Input errors on failure,
-     * preventing the row from being deleted.
-     *
-     * @param stdClass $module_row The stdClass representation of the existing module row
-     */
-    public function deleteModuleRow($module_row)
-    {
     }
 
     /**
@@ -554,18 +590,6 @@ class Centovacast extends Module
     public function getAdminAddFields($package, $vars = null)
     {
         $fields = $this->getClientAddFields($package, $vars);
-
-        // Create password label
-        $password = $fields->label(Language::_('Centovacast.service_field.password', true), 'centovacast_adminpassword');
-        // Create password field and attach to password label
-        $password->attach(
-            $fields->fieldPassword(
-                'centovacast_adminpassword',
-                ['id' => 'centovacast_adminpassword']
-            )
-        );
-        // Set the label as a field
-        $fields->setField($password);
 
         // Create ipaddress label
         $ipaddress = $fields->label(Language::_('Centovacast.service_field.ipaddress', true), 'centovacast_ipaddress');
@@ -686,7 +710,10 @@ class Centovacast extends Module
         $fields->setField($hostname);
 
         // Create password label
-        $password = $fields->label(Language::_('Centovacast.service_field.password', true), 'centovacast_adminpassword');
+        $password = $fields->label(
+            Language::_('Centovacast.service_field.password', true),
+            'centovacast_adminpassword'
+        );
         // Create password field and attach to password label
         $password->attach(
             $fields->fieldPassword(
@@ -819,8 +846,13 @@ class Centovacast extends Module
      * @see Module::getModule()
      * @see Module::getModuleRow()
      */
-    public function addService($package, array $vars = null, $parent_package = null, $parent_service = null, $status = 'pending')
-    {
+    public function addService(
+        $package,
+        array $vars = null,
+        $parent_package = null,
+        $parent_service = null,
+        $status = 'pending'
+    ) {
         $row = $this->getModuleRow();
 
         if (!$row) {
@@ -857,7 +889,13 @@ class Centovacast extends Module
 
             try {
                 // Initialize API
-                $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+                $api = $this->getApi(
+                    $row->meta->hostname,
+                    $row->meta->username,
+                    $row->meta->password,
+                    $row->meta->port,
+                    $row->meta->use_ssl
+                );
 
                 // Select random hosting server
                 $servers = $this->parseResponse($api->listServers());
@@ -865,7 +903,9 @@ class Centovacast extends Module
 
                 $result = $this->parseResponse($api->createAccount($params));
             } catch (Exception $e) {
-                $this->Input->setErrors(['api' => ['internal' => Language::_('Centovacast.!error.api.internal', true)]]);
+                $this->Input->setErrors(
+                    ['api' => ['internal' => Language::_('Centovacast.!error.api.internal', true)]]
+                );
             }
 
             if ($this->Input->errors()) {
@@ -964,7 +1004,13 @@ class Centovacast extends Module
         // Only provision the service if 'use_module' is true
         if ($vars['use_module'] == 'true') {
             // Initialize API
-            $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+            $api = $this->getApi(
+                $row->meta->hostname,
+                $row->meta->username,
+                $row->meta->password,
+                $row->meta->port,
+                $row->meta->use_ssl
+            );
 
             // Check for fields that changed
             $delta = [];
@@ -974,57 +1020,31 @@ class Centovacast extends Module
                 }
             }
 
-            // Update hostname (if changed)
-            if (isset($delta['centovacast_hostname'])) {
-                $params = ['hostname' => $delta['centovacast_hostname']];
-
-                $this->log($row->meta->hostname . '|editaccount', serialize($params), 'input', true);
-                $result = $this->parseResponse($api->editAccount($service_fields->centovacast_username, $params));
+            // Get a list of altered fields
+            $params = [];
+            $account_fields = ['hostname', 'adminpassword', 'title', 'genre', 'ipaddress', 'port'];
+            foreach ($account_fields as $account_field) {
+                if (isset($delta['centovacast_' . $account_field])) {
+                    $params[$account_field] = $delta['centovacast_' . $account_field];
+                }
             }
 
-            // Update password (if changed)
-            if (isset($delta['centovacast_adminpassword'])) {
-                $params = ['adminpassword' => $delta['centovacast_adminpassword']];
-
-                $this->log($row->meta->hostname . '|editaccount', serialize($params), 'input', true);
-                $result = $this->parseResponse($api->editAccount($service_fields->centovacast_username, $params));
-            }
-
-            // Update title (if changed)
-            if (isset($delta['centovacast_title'])) {
-                $params = ['title' => $delta['centovacast_title']];
-
-                $this->log($row->meta->hostname . '|editaccount', serialize($params), 'input', true);
-                $result = $this->parseResponse($api->editAccount($service_fields->centovacast_username, $params));
-            }
-
-            // Update genre (if changed)
-            if (isset($delta['centovacast_genre'])) {
-                $params = ['genre' => $delta['centovacast_genre']];
-
-                $this->log($row->meta->hostname . '|editaccount', serialize($params), 'input', true);
-                $result = $this->parseResponse($api->editAccount($service_fields->centovacast_username, $params));
-            }
-
-            // Update ipaddress (if changed)
-            if (isset($delta['centovacast_ipaddress'])) {
-                $params = ['ipaddress' => $delta['centovacast_ipaddress']];
-
-                $this->log($row->meta->hostname . '|editaccount', serialize($params), 'input', true);
-                $result = $this->parseResponse($api->editAccount($service_fields->centovacast_username, $params));
-            }
-
-            // Update port (if changed)
-            if (isset($delta['centovacast_port'])) {
-                $params = ['port' => $delta['centovacast_port']];
-
+            // Update altered fields
+            if (!empty($params)) {
                 $this->log($row->meta->hostname . '|editaccount', serialize($params), 'input', true);
                 $result = $this->parseResponse($api->editAccount($service_fields->centovacast_username, $params));
             }
         }
 
         // Set fields to update locally
-        $fields = ['centovacast_hostname', 'centovacast_adminpassword', 'centovacast_title', 'centovacast_genre', 'centovacast_ipaddress', 'centovacast_port'];
+        $fields = [
+            'centovacast_hostname',
+            'centovacast_adminpassword',
+            'centovacast_title',
+            'centovacast_genre',
+            'centovacast_ipaddress',
+            'centovacast_port'
+        ];
         foreach ($fields as $field) {
             if (property_exists($service_fields, $field) && isset($vars[$field])) {
                 $service_fields->{$field} = $vars[$field];
@@ -1064,11 +1084,22 @@ class Centovacast extends Module
         $row = $this->getModuleRow();
 
         if ($row) {
-            $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+            $api = $this->getApi(
+                $row->meta->hostname,
+                $row->meta->username,
+                $row->meta->password,
+                $row->meta->port,
+                $row->meta->use_ssl
+            );
 
             $service_fields = $this->serviceFieldsToObject($service->fields);
 
-            $this->log($row->meta->hostname . '|suspendaccount', serialize($service_fields->centovacast_username), 'input', true);
+            $this->log(
+                $row->meta->hostname . '|suspendaccount',
+                serialize($service_fields->centovacast_username),
+                'input',
+                true
+            );
             $this->parseResponse($api->suspendAccount($service_fields->centovacast_username));
         }
 
@@ -1098,11 +1129,22 @@ class Centovacast extends Module
         $row = $this->getModuleRow();
 
         if ($row) {
-            $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+            $api = $this->getApi(
+                $row->meta->hostname,
+                $row->meta->username,
+                $row->meta->password,
+                $row->meta->port,
+                $row->meta->use_ssl
+            );
 
             $service_fields = $this->serviceFieldsToObject($service->fields);
 
-            $this->log($row->meta->hostname . '|unsuspendaccount', serialize($service_fields->centovacast_username), 'input', true);
+            $this->log(
+                $row->meta->hostname . '|unsuspendaccount',
+                serialize($service_fields->centovacast_username),
+                'input',
+                true
+            );
             $this->parseResponse($api->unsuspendAccount($service_fields->centovacast_username));
         }
 
@@ -1132,42 +1174,27 @@ class Centovacast extends Module
         $row = $this->getModuleRow();
 
         if ($row) {
-            $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+            $api = $this->getApi(
+                $row->meta->hostname,
+                $row->meta->username,
+                $row->meta->password,
+                $row->meta->port,
+                $row->meta->use_ssl
+            );
 
             $service_fields = $this->serviceFieldsToObject($service->fields);
 
-            $this->log($row->meta->hostname . '|terminateaccount', serialize($service_fields->centovacast_username), 'input', true);
+            $this->log(
+                $row->meta->hostname . '|terminateaccount',
+                serialize($service_fields->centovacast_username),
+                'input',
+                true
+            );
             $this->parseResponse($api->terminateAccount($service_fields->centovacast_username));
 
             // Update the number of accounts on the server
             $this->updateAccountCount($row);
         }
-
-        return null;
-    }
-
-    /**
-     * Updates the package for the service on the remote server. Sets Input
-     * errors on failure, preventing the service's package from being changed.
-     *
-     * @param stdClass $package_from A stdClass object representing the current package
-     * @param stdClass $package_to A stdClass object representing the new package
-     * @param stdClass $service A stdClass object representing the current service
-     * @param stdClass $parent_package A stdClass object representing the parent
-     *  service's selected package (if the current service is an addon service)
-     * @param stdClass $parent_service A stdClass object representing the parent
-     *  service of the service being changed (if the current service is an addon service)
-     * @return mixed null to maintain the existing meta fields or a numerically
-     *  indexed array of meta fields to be stored for this service containing:
-     *  - key The key for this meta field
-     *  - value The value for this key
-     *  - encrypted Whether or not this field should be encrypted (default 0, not encrypted)
-     * @see Module::getModule()
-     * @see Module::getModuleRow()
-     */
-    public function changeServicePackage($package_from, $package_to, $service, $parent_package = null, $parent_service = null)
-    {
-        // Nothing to do
 
         return null;
     }
@@ -1246,7 +1273,13 @@ class Centovacast extends Module
         $this->view = new View('tab_stats', 'default');
 
         // Initialize API
-        $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+        $api = $this->getApi(
+            $row->meta->hostname,
+            $row->meta->username,
+            $row->meta->password,
+            $row->meta->port,
+            $row->meta->use_ssl
+        );
 
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html']);
@@ -1283,7 +1316,13 @@ class Centovacast extends Module
         $this->view->base_uri = $this->base_uri;
 
         // Initialize API
-        $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+        $api = $this->getApi(
+            $row->meta->hostname,
+            $row->meta->username,
+            $row->meta->password,
+            $row->meta->port,
+            $row->meta->use_ssl
+        );
 
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html']);
@@ -1310,7 +1349,19 @@ class Centovacast extends Module
 
         // Get account information
         $account_info = $this->parseResponse($api->getAccount($service_fields->centovacast_username))->account;
-        $stream_info = $this->parseResponse($api->getStream($service_fields->centovacast_username, $account_info->mountpoints[0]->mountname))->status;
+
+        $mount_name = 'all';
+        switch ($account_info->servertype) {
+            case 'ShoutCast2':
+                $mount_name = $account_info->mountpoints[0]->streampath;
+                break;
+            case 'IceCast':
+                $mount_name = $account_info->mountpoints[0]->mountname;
+                break;
+        }
+        $stream_info = $this->parseResponse(
+            $api->getStream($service_fields->centovacast_username, $mount_name)
+        )->status;
 
         $this->view->set('service_fields', $service_fields);
         $this->view->set('service_id', $service->id);
@@ -1341,7 +1392,13 @@ class Centovacast extends Module
         $this->view = new View('tab_client_stats', 'default');
 
         // Initialize API
-        $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+        $api = $this->getApi(
+            $row->meta->hostname,
+            $row->meta->username,
+            $row->meta->password,
+            $row->meta->port,
+            $row->meta->use_ssl
+        );
 
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html']);
@@ -1378,7 +1435,13 @@ class Centovacast extends Module
         $this->view->base_uri = $this->base_uri;
 
         // Initialize API
-        $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+        $api = $this->getApi(
+            $row->meta->hostname,
+            $row->meta->username,
+            $row->meta->password,
+            $row->meta->port,
+            $row->meta->use_ssl
+        );
 
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html']);
@@ -1412,7 +1475,10 @@ class Centovacast extends Module
                 case 'radio_title':
                     // Update the service title
                     Loader::loadModels($this, ['Services']);
-                    $this->Services->editField($service->id, ['key' => 'centovacast_title', 'value' => $post['radio_title']]);
+                    $this->Services->editField(
+                        $service->id,
+                        ['key' => 'centovacast_title', 'value' => $post['radio_title']]
+                    );
 
                     if (($errors = $this->Services->errors())) {
                         $this->Input->setErrors($errors);
@@ -1436,13 +1502,23 @@ class Centovacast extends Module
                         if ($this->Input->validates($post)) {
                             // Update the service password
                             Loader::loadModels($this, ['Services']);
-                            $this->Services->editField($service->id, ['key' => 'centovacast_adminpassword', 'value' => $post['password'], 'encrypted' => true]);
+                            $this->Services->editField(
+                                $service->id,
+                                [
+                                    'key' => 'centovacast_adminpassword',
+                                    'value' => $post['password'],
+                                    'encrypted' => true
+                                ]
+                            );
 
                             if (($errors = $this->Services->errors())) {
                                 $this->Input->setErrors($errors);
                             }
 
-                            $api->editAccount($service_fields->centovacast_username, ['adminpassword' => $post['password']]);
+                            $api->editAccount(
+                                $service_fields->centovacast_username,
+                                ['adminpassword' => $post['password']]
+                            );
                         }
 
                         $vars = $post;
@@ -1455,13 +1531,25 @@ class Centovacast extends Module
 
         // Get account information
         $account_info = $this->parseResponse($api->getAccount($service_fields->centovacast_username))->account;
-        $stream_info = $this->parseResponse($api->getStream($service_fields->centovacast_username, $account_info->mountpoints[0]->mountname))->status;
+
+        $mount_name = 'all';
+        switch ($account_info->servertype) {
+            case 'ShoutCast2':
+                $mount_name = $account_info->mountpoints[0]->streampath;
+                break;
+            case 'IceCast':
+                $mount_name = $account_info->mountpoints[0]->mountname;
+                break;
+        }
+        $stream_info = $this->parseResponse(
+            $api->getStream($service_fields->centovacast_username, $mount_name)
+        )->status;
 
         $this->view->set('service_fields', $service_fields);
         $this->view->set('service_id', $service->id);
         $this->view->set('account_info', $account_info);
         $this->view->set('stream_info', $stream_info);
-        $this->view->set('vars', (isset($vars) ? $vars : new stdClass()));
+        $this->view->set('vars', (isset($vars) ? (object)$vars : new stdClass()));
 
         $this->view->setDefaultView('components' . DS . 'modules' . DS . 'centovacast' . DS);
 
@@ -1482,7 +1570,7 @@ class Centovacast extends Module
 
         return $this->Input->matches(
             $host_name,
-            "/^([a-z0-9]|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9])(\.([a-z0-9]|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))+$/"
+            '/^([a-z0-9]|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9])(\.([a-z0-9]|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))+$/'
         );
     }
 
@@ -1511,10 +1599,16 @@ class Centovacast extends Module
      *
      * @param stdClass $module_row A stdClass object representing a single server
      */
-    private function updateAccountCount($module_row)
+    private function updateAccountCount($module_row, $increase = true)
     {
         // Initialize API
-        $api = $this->getApi($module_row->meta->hostname, $module_row->meta->username, $module_row->meta->password, $module_row->meta->port, $module_row->meta->use_ssl);
+        $api = $this->getApi(
+            $module_row->meta->hostname,
+            $module_row->meta->username,
+            $module_row->meta->password,
+            $module_row->meta->port,
+            $module_row->meta->use_ssl
+        );
 
         // Get the number of accounts on the server
         if (($count = $this->getAccountCount($api)) !== false) {
@@ -1535,11 +1629,6 @@ class Centovacast extends Module
      * Validates whether or not the connection details are valid by attempting to fetch
      * the number of accounts that currently reside on the server.
      *
-     * @param mixed $password The CentovaCast password
-     * @param mixed $hostname The CentovaCast hostname
-     * @param mixed $username The CentovaCast username
-     * @param mixed $port The CentovaCast installation port
-     * @param mixed $use_ssl Ture to use SSL
      * @return bool True if the connection is valid, false otherwise
      */
     public function validateConnection($password, $hostname, $username, $port, $use_ssl)
@@ -1572,7 +1661,7 @@ class Centovacast extends Module
         $pool_size = strlen($pool);
 
         if ($length < 5) {
-            for ($i=$length; $i < 8; $i++) {
+            for ($i = $length; $i < 8; $i++) {
                 $username .= substr($pool, mt_rand(0, $pool_size - 1), 1);
             }
             $length = strlen($username);
@@ -1582,7 +1671,13 @@ class Centovacast extends Module
 
         // Check for existing user accounts
         $row = $this->getModuleRow();
-        $api = $this->getApi($row->meta->hostname, $row->meta->username, $row->meta->password, $row->meta->port, $row->meta->use_ssl);
+        $api = $this->getApi(
+            $row->meta->hostname,
+            $row->meta->username,
+            $row->meta->password,
+            $row->meta->port,
+            $row->meta->use_ssl
+        );
 
         $accounts_usernames = $api->listUsernames();
 
@@ -1607,7 +1702,7 @@ class Centovacast extends Module
         $length = mt_rand(max($min_length, 5), min($max_length, 14));
         $password = '';
 
-        for ($i=0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; $i++) {
             $password .= substr($pool, mt_rand(0, $pool_size - 1), 1);
         }
 
@@ -1632,7 +1727,9 @@ class Centovacast extends Module
             'sourcepassword' => $this->generatePassword(),
             'title' => !empty($vars['centovacast_title']) ? $vars['centovacast_title'] : null,
             'genre' => !empty($vars['centovacast_genre']) ? $vars['centovacast_genre'] : null,
-            'ipaddress' => !empty($vars['centovacast_ipaddress']) ? $vars['centovacast_ipaddress'] : $row->meta->ipaddress,
+            'ipaddress' => !empty($vars['centovacast_ipaddress'])
+                ? $vars['centovacast_ipaddress']
+                : $row->meta->ipaddress,
             'port' => !empty($vars['centovacast_port']) ? $vars['centovacast_port'] : 'auto',
             'email' => !empty($vars['centovacast_email']) ? $vars['centovacast_email'] : null,
             'url' => !empty($vars['centovacast_hostname']) ? 'http://' . $vars['centovacast_hostname'] : null,
@@ -1687,11 +1784,9 @@ class Centovacast extends Module
     /**
      * Initializes the CentovacastApi and returns an instance of that object with the given $host, $user, and $pass set.
      *
-     * @param mixed $hostname The host to the CentovaCast server
-     * @param mixed $username The CentovaCast API user
-     * @param mixed $password The CentovaCast API password
-     * @param mixed $port The CentovaCast installation port
-     * @param mixed $use_ssl True to use SSL
+     * @param string $host The host to the CentovaCast server
+     * @param string $user The user to connect as
+     * @param string $pass The hash-pased password to authenticate with
      * @return CentovacastApi The CentovacastApi instance
      */
     private function getApi($hostname, $username, $password, $port = 2199, $use_ssl = false)
@@ -1758,7 +1853,7 @@ class Centovacast extends Module
             ],
             'port' => [
                 'valid' => [
-                    'rule' => ['matches', '/^([0-9]+)?$/'],
+                    'rule' => ['matches', '/^([0-9]+)$/'],
                     'message' => Language::_('Centovacast.!error.port_valid', true)
                 ]
             ]
@@ -1773,36 +1868,36 @@ class Centovacast extends Module
      * @param array $vars An array of key/value data pairs
      * @return array An array of Input rules suitable for Input::setRules()
      */
-    private function getPackageRules($vars)
+    private function getPackageRules()
     {
         $rules = [
             'meta[servertype]' => [
                 'valid' => [
-                    'rule' => ['matches', '/^(IceCast|ShoutCast2|ShoutCast)$/'],
+                    'rule' => ['in_array', array_keys($this->getServerTypes())],
                     'message' => Language::_('Centovacast.!error.meta[servertype].valid', true),
                 ]
             ],
             'meta[maxclients]' => [
                 'valid' => [
-                    'rule' => ['matches', '/^([0-9]+)?$/'],
+                    'rule' => ['matches', '/^([0-9]+)$/'],
                     'message' => Language::_('Centovacast.!error.meta[maxclients].valid', true),
                 ]
             ],
             'meta[maxbitrate]' => [
                 'valid' => [
-                    'rule' => ['matches', '/^([0-9]+)?$/'],
+                    'rule' => ['matches', '/^([0-9]+)$/'],
                     'message' => Language::_('Centovacast.!error.meta[maxbitrate].valid', true),
                 ]
             ],
             'meta[transferlimit]' => [
                 'valid' => [
-                    'rule' => ['matches', '/^([0-9]+)?$/'],
+                    'rule' => ['matches', '/^([0-9]+)$/'],
                     'message' => Language::_('Centovacast.!error.meta[transferlimit].valid', true),
                 ]
             ],
             'meta[diskquota]' => [
                 'valid' => [
-                    'rule' => ['matches', '/^([0-9]+)?$/'],
+                    'rule' => ['matches', '/^([0-9]+)$/'],
                     'message' => Language::_('Centovacast.!error.meta[diskquota].valid', true),
                 ]
             ]
