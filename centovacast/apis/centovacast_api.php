@@ -42,6 +42,11 @@ class CentovacastApi
 
     /**
      * Initializes the class.
+     * @param mixed $hostname
+     * @param mixed $username
+     * @param mixed $password
+     * @param mixed $port
+     * @param mixed $use_ssl
      */
     public function __construct($hostname, $username, $password, $port = 2199, $use_ssl = false)
     {
