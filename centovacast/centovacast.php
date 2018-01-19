@@ -260,7 +260,7 @@ class Centovacast extends Module
     }
 
     /**
-     * Gets a list of available server types
+     * Gets a list of available server types.
      *
      * @return array A key/value array of available server types and their languages
      */
@@ -1549,7 +1549,7 @@ class Centovacast extends Module
         $this->view->set('service_id', $service->id);
         $this->view->set('account_info', $account_info);
         $this->view->set('stream_info', $stream_info);
-        $this->view->set('vars', (isset($vars) ? (object)$vars : new stdClass()));
+        $this->view->set('vars', (isset($vars) ? (object) $vars : new stdClass()));
 
         $this->view->setDefaultView('components' . DS . 'modules' . DS . 'centovacast' . DS);
 
@@ -1598,6 +1598,7 @@ class Centovacast extends Module
      * Updates the module row meta number of accounts.
      *
      * @param stdClass $module_row A stdClass object representing a single server
+     * @param mixed $increase
      */
     private function updateAccountCount($module_row, $increase = true)
     {
@@ -1629,6 +1630,11 @@ class Centovacast extends Module
      * Validates whether or not the connection details are valid by attempting to fetch
      * the number of accounts that currently reside on the server.
      *
+     * @param mixed $password
+     * @param mixed $hostname
+     * @param mixed $username
+     * @param mixed $port
+     * @param mixed $use_ssl
      * @return bool True if the connection is valid, false otherwise
      */
     public function validateConnection($password, $hostname, $username, $port, $use_ssl)
@@ -1787,6 +1793,11 @@ class Centovacast extends Module
      * @param string $host The host to the CentovaCast server
      * @param string $user The user to connect as
      * @param string $pass The hash-pased password to authenticate with
+     * @param mixed $hostname
+     * @param mixed $username
+     * @param mixed $password
+     * @param mixed $port
+     * @param mixed $use_ssl
      * @return CentovacastApi The CentovacastApi instance
      */
     private function getApi($hostname, $username, $password, $port = 2199, $use_ssl = false)
